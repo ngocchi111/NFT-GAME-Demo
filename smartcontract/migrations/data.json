@@ -1,0 +1,512 @@
+[
+    {
+        "id": 1,
+        "name": "GONOGO",
+        "description": "Quái sau khi Chiến Đấu với lá bài này thế công thủ sẽ bị đổi",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiQuai/gongo.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 1350
+            },
+            {
+                "trait_type": "def",
+                "value": 1600
+            }
+        ],
+        "price": "0.295"
+    },
+    {
+        "id": 2,
+        "name": "TAY PHẢI BỊ PHONG ẤN",
+        "description": "Tay phải bị phong ấn. Ẩn chứa sức mạnh vô hạn.",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiQuai/tay%20phai%20bi%20xich.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 200
+            },
+            {
+                "trait_type": "def",
+                "value": 300
+            }
+        ],
+        "price": "0.050"
+    },
+    {
+        "id": 3,
+        "name": "KURIBOH CÓ NƠ",
+        "description": "Nơ đáng yêu, thường dùng làm quà tỏ tình.",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiQuai/kuriboh%20co%20no.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 300
+            },
+            {
+                "trait_type": "def",
+                "value": 200
+            }
+        ],
+        "price": "0.050"
+    },
+    {
+        "id": 4,
+        "name": "CẬN THẦN HỎA ĐẾ BERLINES",
+        "description": "Người hầu trung thành của Hỏa Đế, có thể làm tất cả vì Hỏa Đế.",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiQuai/cau%20than%20hoa%20de%20-%20berlines.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 800
+            },
+            {
+                "trait_type": "def",
+                "value": 1000
+            }
+        ],
+        "price": "0.180"
+    },
+    {
+        "id": 5,
+        "name": "HỎA ĐẾ TINSDAROS",
+        "description": "Quốc vương nắm giữ quyền năng của lửa, dùng lửa để tấn công kẻ thù.",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiQuai/hoa%20de%20-%20tinsdaros.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 2400
+            },
+            {
+                "trait_type": "def",
+                "value": 1000
+            }
+        ],
+        "price": "0.340"
+    },
+    {
+        "id": 6,
+        "name": "GÂY RỐI·LAM",
+        "description": "Thành viên mới vào Bộ Tứ Gây Rối. Lúc này đã trở thành Bộ Năm Gây Rối.",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiQuai/gay%20roi%20-%20lam.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 0
+            },
+            {
+                "trait_type": "def",
+                "value": 1000
+            }
+        ],
+        "price": "0.100"
+    },
+    {
+        "id": 7,
+        "name": "MÁY CHÉM",
+        "description": "Dùng lưỡi sắc cắt đôi mục tiêu! Thật đáng sợ!",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiQuai/may-chem.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 1750
+            },
+            {
+                "trait_type": "def",
+                "value": 2000
+            }
+        ],
+        "price": "0.375"
+    },
+    {
+        "id": 8,
+        "name": "PHÁP SƯ HỖN ĐỘN",
+        "description": "Pháp sư sinh ra từ sức mạnh hỗn độn, có khả năng nhìn thấu mọi việc.",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiQuai/phap%20su%20hon%20don.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 2400
+            },
+            {
+                "trait_type": "def",
+                "value": 1900
+            }
+        ],
+        "price": "0.430"
+    },
+    {
+        "id": 9,
+        "name": "OBELISK THE TORMENTOR",
+        "description": "Thần hủy diệt Obelisk, một trong 3 vị thần, Ishizu đã giao cho Kaiba lá bài này.",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiQuai/obelisk%20the%20tormentor.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 4000
+            },
+            {
+                "trait_type": "def",
+                "value": 4000
+            }
+        ],
+        "price": "0.800"
+    },
+    {
+        "id": 10,
+        "name": "THIÊN SỨ SONG SINH",
+        "description": "Thiên sứ song sinh, có thể thấu hiểu ý nghĩ của nhau.",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiQuai/thien%20su%20song%20sinh.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 1700
+            },
+            {
+                "trait_type": "def",
+                "value": 0
+            }
+        ],
+        "price": "0.170"
+    },
+    {
+        "id": 11,
+        "name": "THIÊN SỨ SA NGÃ SUPERBIA",
+        "description": "Thiên sứ sa ngã có sức mạnh triệu hồi đồng đội đã tử vong.",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiQuai/thien%20su%20sa%20nga%20superbia.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 2900
+            },
+            {
+                "trait_type": "def",
+                "value": 2400
+            }
+        ],
+        "price": "0.530"
+    },
+    {
+        "id": 12,
+        "name": "ĐỊA ĐẾ GRANMARG",
+        "description": "Vua của đất, có thể thay đổi địa hình dễ dàng.",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiQuai/granmarg.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 2400
+            },
+            {
+                "trait_type": "def",
+                "value": 1000
+            }
+        ],
+        "price": "0.340"
+    },
+    {
+        "id": 13,
+        "name": "NỮ HOÀNG HARPIE",
+        "description": "Nữ hoàng của bộ tộc Người Chim Harpie, có sức mạnh bão lốc.",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiQuai/nu%20hoang%20harpie.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 1900
+            },
+            {
+                "trait_type": "def",
+                "value": 1200
+            }
+        ],
+        "price": "0.310"
+    },
+    {
+        "id": 14,
+        "name": "XẠ THỦ AMAZON",
+        "description": "Chiến binh Amazon chuyên tấn công từ xa.",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiQuai/xa%20thu%20amzon.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 1400
+            },
+            {
+                "trait_type": "def",
+                "value": 1000
+            }
+        ],
+        "price": "0.240"
+    },
+    {
+        "id": 15,
+        "name": "HỎA ĐẾ TINSDAROS",
+        "description": "Quốc vương nắm giữ quyền năng của lửa, dùng lửa để tấn công kẻ thù.",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiQuai/hoa%20de%20-%20tinsdaros.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 2400
+            },
+            {
+                "trait_type": "def",
+                "value": 1000
+            }
+        ],
+        "price": "0.340"
+    },
+    {
+        "id": 16,
+        "name": "QUÁI THÚ CHIMERA",
+        "description": "<Vua Thú Gazelle>+<Baphomet>",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiDungHop/quai%20thu%20chimera.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 2100
+            },
+            {
+                "trait_type": "def",
+                "value": 1800
+            }
+        ],
+        "price": "0.390"
+    },
+    {
+        "id": 17,
+        "name": "TAY KIẾM LỬA THIÊNG",
+        "description": "<Đấu Sĩ Lửa>+<Kiếm Khách Masaki>",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiDungHop/tay%20kiem%20lua%20thieng.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 1800
+            },
+            {
+                "trait_type": "def",
+                "value": 1600
+            }
+        ],
+        "price": "0.340"
+    },
+    {
+        "id": 18,
+        "name": "KỴ SĨ BẦU TRỜI",
+        "description": "<Kỵ Sĩ Hoàng Hậu>+<Kỵ Sĩ Vệ Binh>+<Kỵ Sĩ Quốc Vương>",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiDungHop/ky%20si%20bau%20troi.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 3800
+            },
+            {
+                "trait_type": "def",
+                "value": 2500
+            }
+        ],
+        "price": "0.630"
+    },
+    {
+        "id": 19,
+        "name": "PHÁP SƯ BA MẮT",
+        "description": "<Phù Thủy Rừng Đen>+<Quái Ba Mắt>",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiDungHop/phap%20su%20ba%20mat.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 2100
+            },
+            {
+                "trait_type": "def",
+                "value": 1800
+            }
+        ],
+        "price": "0.390"
+    },
+    {
+        "id": 20,
+        "name": "KỴ SĨ RỒNG THIÊNG",
+        "description": "<Kỵ Sĩ Gaia>+<Rồng Nguyền Rủa>",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiDungHop/ky%20si%20rong%20thieng.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 2600
+            },
+            {
+                "trait_type": "def",
+                "value": 2100
+            }
+        ],
+        "price": "0.470"
+    },
+    {
+        "id": 21,
+        "name": "THỔI TÊN AMAZON",
+        "description": "Lính trinh sát Amazon, giỏi ẩn nấp.",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiQuai/thoi%20ten%20amazon.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 800
+            },
+            {
+                "trait_type": "def",
+                "value": 1500
+            }
+        ],
+        "price": "0.230"
+    },
+    {
+        "id": 22,
+        "name": "HARPIE LADY SAN",
+        "description": "Ma thú hình người có cánh, biểu diễn điệu nhảy đẹp tiến hành tấn công.",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiQuai/harpie%20lady%20-%20san.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 1300
+            },
+            {
+                "trait_type": "def",
+                "value": 1400
+            }
+        ],
+        "price": "0.270"
+    },
+    {
+        "id": 23,
+        "name": "HARPIE LADY Y",
+        "description": "Ma thú hình người có cánh, biểu diễn điệu nhảy đẹp tiến hành tấn công.",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiQuai/harpie%20lady%20-%20y.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 1300
+            },
+            {
+                "trait_type": "def",
+                "value": 1400
+            }
+        ],
+        "price": "0.270"
+    },
+    {
+        "id": 24,
+        "name": "CHIM CỰC QUANG",
+        "description": "Loài chim chỉ được nhìn thấy nơi có Cực Quang, có khả năng xuyên không gian.",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiQuai/chim%20cuc%20quang.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 1200
+            },
+            {
+                "trait_type": "def",
+                "value": 1600
+            }
+        ],
+        "price": "0.280"
+    },
+    {
+        "id": 25,
+        "name": "CHIM ĐỐI LƯU",
+        "description": "Có thể xác định chính xác dòng chuyển động của không khí, tránh xa nguy hiểm.",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiQuai/chim%20doi%20luu.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 2400
+            },
+            {
+                "trait_type": "def",
+                "value": 2000
+            }
+        ],
+        "price": "0.440"
+    },
+    {
+        "id": 26,
+        "name": "HẠC THÁNH",
+        "description": "Toàn thân trắng muốt, phát sức mạnh thần thánh.",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiQuai/hac%20thanh.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 1600
+            },
+            {
+                "trait_type": "def",
+                "value": 400
+            }
+        ],
+        "price": "0.200"
+    },
+    {
+        "id": 27,
+        "name": "NGƯỜI CHIM",
+        "description": "Người Chim có thể bay với vận tốc cực lớn, ánh mất cực kỳ sắc bén.",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiQuai/nguoi%20chim.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 1800
+            },
+            {
+                "trait_type": "def",
+                "value": 600
+            }
+        ],
+        "price": "0.240"
+    },
+    {
+        "id": 28,
+        "name": "THỢ SĂN TỬ THẦN",
+        "description": "Trong bộ lông vũ ẩn chứa lưỡi sắc, tấn công bổ nhào từ trên cao.",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiQuai/tho%20san%20tu%20than.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 1550
+            },
+            {
+                "trait_type": "def",
+                "value": 1200
+            }
+        ],
+        "price": "0.275"
+    },
+    {
+        "id": 29,
+        "name": "CHIM THÁNH",
+        "description": "Chim có lông đuôi rất dài, toàn thân phát sáng.",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiQuai/chim%20thanh.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 1500
+            },
+            {
+                "trait_type": "def",
+                "value": 1100
+            }
+        ],
+        "price": "0.260"
+    },
+    {
+        "id": 30,
+        "name": "CHIẾN BINH BÃO LỐC",
+        "description": "Có thể đi xuyên qua những cơn bão mạnh nhất.",
+        "image": "https://img.zing.vn/upload/yugi/source/Hero3Q/BaiQuai/chien%20binh%20bao%20loc.png",
+        "attributes": [
+            {
+                "trait_type": "atk",
+                "value": 1500
+            },
+            {
+                "trait_type": "def",
+                "value": 1600
+            }
+        ],
+        "price": "0.310"
+    }
+]

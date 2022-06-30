@@ -1,0 +1,28 @@
+<button onclick="myFunction()">1</button>
+<div class="row">
+        {{#each cards}}
+        <div class="col-sm">
+                <div class="card" style="width: 250px; margin-top: 10px">
+                    <img class="card-img-top" src="{{image}}" alt="{{name}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{price}} ETH</h5>
+                        <a href="#" class="btn btn-primary">Mua</a>
+                    </div>
+                </div>
+        </div>
+        {{/each}}
+</div>
+<dialog style="position: absolute; top: 100px;">
+  <p>Greetings, one and all!</p>
+  <button onclick="myFunction1()">close</button>
+</dialog>
+<script>
+    function myFunction() {
+    const d = document.querySelector('dialog');
+    d.show();
+    }
+    function myFunction1() {
+    const d = document.querySelector('dialog');
+    d.close();
+    }
+</script>

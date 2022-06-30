@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Game the bai</title>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="https://unpkg.com/moralis/dist/moralis.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
+
+    <style>
+        body {
+            text-align: center;
+        }
+
+        .login_button {
+            margin-top: 20px;
+            text-align: center;
+            height: 8vh;
+            width: 36vw;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="w3-col l10 m12">
+        <p id="txtMessage">message here</p>
+        <button id="btnLogin" type="button" class="btn btn-primary btn-sm login_button">
+            Login With Metamask
+        </button>
+        <button id="btnContractName" type="button" class="btn btn-primary btn-sm login_button">
+            contract name
+        </button>
+        <button id="btnbalanceOf" type="button" class="btn btn-primary btn-sm login_button">
+            balance of current address
+        </button>
+
+        <button id="btngetAllCardIds" type="button" class="btn btn-primary btn-sm login_button">
+            getAllCardIds
+        </button>
+        <button id="btngetOwnCardIds" type="button" class="btn btn-primary btn-sm login_button">
+            getOwnCardIds
+        </button>
+        <button id="btngetOwnCollection" type="button" class="btn btn-primary btn-sm login_button">
+            getOwnCollection
+        </button>
+        <button id="btngetTokenPrice" type="button" class="btn btn-primary btn-sm login_button">
+            getTokenPrice
+        </button>
+        <button id="btnbuyCard" type="button" class="btn btn-primary btn-sm login_button">
+            buyCard
+        </button>
+        <button id="btntakePromotionalCard" type="button" class="btn btn-primary btn-sm login_button">
+            takePromotionalCard
+        </button>
+    </div>
+
+    <script type="text/javascript" src="./main.js"></script>
+</body>
+
+</html>

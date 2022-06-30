@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="row">
+        {{#each buildCards}}
+        <div class="col">
+            <div class="card" style="width: 200px; margin: auto">
+                <img src="./behind.jpg" class="card-img-top" alt="...">
+            </div>
+        </div>
+        
+        {{/each}}
+    </div>
+    <div class="row">
+        {{#each buildCards}}
+        <div class="col"> 
+            <div class="card" style="width: 200px; margin: auto">
+                <div class="card-title" style="text-align: center">Kết quả</div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    <div class="row">
+        {{#each buildCards}}
+        <div class="col">
+            <div class="card" style="width: 200px; margin: auto">
+                <img src="{{image}}" class="card-img-top" alt="...">
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    <div class="row">
+        {{#each buildCards}}
+        <div class="col"> 
+            <div class="card" style="width: 200px; margin: auto">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-primary active">Công</button>
+                    <button type="button" class="btn btn-primary inactive">Thủ</button>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    <div class="row">
+        {{#each buildCards}}
+        <div class="col"> 
+            <div class="card" style="width: 200px; margin: auto">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-primary"><i class="fa fa-arrow-left"></i></button>
+                    <button type="button" class="btn btn-primary"><i class="fa fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
