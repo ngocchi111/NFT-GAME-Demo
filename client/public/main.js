@@ -3,7 +3,7 @@ const serverUrl = "https://9pahilwouybl.usemoralis.com:2053/server";
 const appId = "2Gv1uDCXoElW5qnEbbUBxaDuVS7IxzZsjSyzm2Px";
 Moralis.start({ serverUrl, appId });
 
-const CONTRACT_ADDRESS = "0x3be2901AA5c59944aAAbAE4a00F217217Fb465BB";
+const CONTRACT_ADDRESS = "0xcc44Da1d50A8D186ea8bbed67dF18Ee7fac35795";
 
 let user = null;
 let web3 = null;
@@ -61,7 +61,7 @@ function getAbi() {
 }
 
 //TODO: hardcode
-//logOut();
+// logOut();
 
 
 //test name
@@ -80,11 +80,11 @@ async function balanceOf() {
 
 //test getAllCardIds
 async function getAllCardIds() {
-    try{
+    try {
         let data = await contract.methods.getAllCardIds().call({ from: ethereum.selectedAddress });
         return data;
     }
-    catch(e){
+    catch (e) {
         console.log(e);
         return null;
     }
@@ -97,7 +97,7 @@ async function getOwnCardIds() {
         let data = await contract.methods.getOwnCardIds(ethereum.selectedAddress).call({ from: ethereum.selectedAddress });
         return data;
     }
-    catch(e){
+    catch (e) {
         return null;
     }
 }
@@ -157,13 +157,15 @@ async function buyCard(card) {
 }
 
 //sellCard 
-async function sellCard({id}) {
+async function sellCard({ id }) {
     await contract.methods.sellCard(id)
         .send({
             from: ethereum.selectedAddress,
             'gas': 1000000,
             'gasPrice': 20000000000,
         });
+
+    window.location.href = '/';
 }
 
 // receive Card
@@ -180,16 +182,18 @@ async function takePromotionalCard() {
 
 var isOpen = false;
 checkLogin()
-async function openShop(){
+async function openShop() {
     if (isOpen) return;
     const cards = await getAllCardIds();
     if (!cards) return;
     $('#rShop').empty();
     var i = 0;
     while (cards[i]) {
-        var cardJson = await fetch(`api/v1/cards/${cards[i]}`, {method: 'get',headers: {
-            "Content-Type": "application/json",
-        }})
+        var cardJson = await fetch(`api/v1/cards/${cards[i]}`, {
+            method: 'get', headers: {
+                "Content-Type": "application/json",
+            }
+        })
         const card = await cardJson.json();
         i++;
         $('#rShop').append(`
@@ -207,7 +211,7 @@ async function openShop(){
     openShop = true;
 }
 
-async function openCollection(){
+async function openCollection() {
     if (!Moralis.User.current())
         await login();
     if (isOpen) return;
@@ -215,9 +219,11 @@ async function openCollection(){
     $('#rCollection').empty();
     var i = 0;
     while (cards && cards[i]) {
-        var cardJson = await fetch(`api/v1/cards/${cards[i]}`, {method: 'get',headers: {
-            "Content-Type": "application/json",
-        }})
+        var cardJson = await fetch(`api/v1/cards/${cards[i]}`, {
+            method: 'get', headers: {
+                "Content-Type": "application/json",
+            }
+        })
         const card = await cardJson.json();
         i++;
         $('#rCollection').append(`
@@ -237,13 +243,13 @@ async function openCollection(){
 
 const buildCards = [];
 const botCards = [];
-const state = [0,0,0,0,0];
-var isCal =  false;
-const result = [0,0,0,0,0];
-const stateBot = [0,0,0,0,0];
+const state = [0, 0, 0, 0, 0];
+var isCal = false;
+const result = [0, 0, 0, 0, 0];
+const stateBot = [0, 0, 0, 0, 0];
 var lv = 1;
 
-async function openPlay(){
+async function openPlay() {
     if (!Moralis.User.current())
         await login();
     if (isOpen) return;
@@ -251,8 +257,8 @@ async function openPlay(){
     if (!_myCards)
         return
     const myCards = [];
-    for (var card of _myCards){
-        var cardJson = await fetch(`/api/v1/cards/${card}`,{
+    for (var card of _myCards) {
+        var cardJson = await fetch(`/api/v1/cards/${card}`, {
             method: 'get',
             headers: {
                 "Content-Type": "application/json",
@@ -269,14 +275,14 @@ async function openPlay(){
     });
     var lv1 = await t.json();
     lv = lv1.lv;
-    if (!myCards || myCards.length<5){
+    if (!myCards || myCards.length < 5) {
         alert('Vui lòng tích đủ 5 thẻ bài!')
         return
     }
     var _cards = await getAllCardIds();
     const cards = [];
-    for (var card of _cards){
-        var cardJson = await fetch(`/api/v1/cards/${card}`,{
+    for (var card of _cards) {
+        var cardJson = await fetch(`/api/v1/cards/${card}`, {
             method: 'get',
             headers: {
                 "Content-Type": "application/json",
@@ -285,15 +291,15 @@ async function openPlay(){
         card = await cardJson.json();
         cards.push(card);
     }
-    var check = [-1,-1,-1,-1,-1];
+    var check = [-1, -1, -1, -1, -1];
 
-    if (lv>19) lv = 1;
-    const min = Math.floor(lv/10) * 1500;
-    const max = (Math.floor(lv/10) + 1) * 1500;
+    if (lv > 19) lv = 1;
+    const min = Math.floor(lv / 10) * 1500;
+    const max = (Math.floor(lv / 10) + 1) * 1500;
     var n = 0;
     while (myCards[n])
         n++;
-    for (var i = 0; i<5;i++){
+    for (var i = 0; i < 5; i++) {
         var v = true;
         var u;
         while (v) {
@@ -306,18 +312,18 @@ async function openPlay(){
         check[i] = u;
         buildCards.push(myCards[u]);
     }
-    check = [-1,-1,-1,-1,-1];
+    check = [-1, -1, -1, -1, -1];
     const cards1 = [];
-    for (var u=0; u<cards.length;u++)
+    for (var u = 0; u < cards.length; u++)
         if ((cards[u].attributes[0].value >= min && cards[u].attributes[0].value <= max)
-            &&  (cards[u].attributes[1].value >= min && cards[u].attributes[1].value <= max))
-                cards1.push(cards[u])
+            && (cards[u].attributes[1].value >= min && cards[u].attributes[1].value <= max))
+            cards1.push(cards[u])
     console.log(cards1)
-    for (var i = 0; i<5;i++){
+    for (var i = 0; i < 5; i++) {
         var v = true;
         var u;
         while (v) {
-            v=false;
+            v = false;
             u = Math.floor(Math.random() * cards1.length);
             for (var t of check)
                 if (t === u)
@@ -331,7 +337,7 @@ async function openPlay(){
     $("#rPlay3").empty();
     $("#rPlay4").empty();
     $("#rPlay5").empty();
-    for (var i=0; i<5;i++){
+    for (var i = 0; i < 5; i++) {
         $("#rPlay1").append(`
         <div class="col">
             <div class="card" style="width: 200px; margin: auto">
@@ -376,28 +382,28 @@ async function openPlay(){
     }
     $("#dPlay").show();
 }
-function toAtk(i){
-    $('#bt'+i.toString()+'1').addClass('active');
-    $('#bt'+i.toString()+'2').removeClass('active').addClass('inactive');
+function toAtk(i) {
+    $('#bt' + i.toString() + '1').addClass('active');
+    $('#bt' + i.toString() + '2').removeClass('active').addClass('inactive');
     state[i] = 0;
 }
 
-function toDef(i){
-    $('#bt'+i.toString()+'2').addClass('active');
-    $('#bt'+i.toString()+'1').removeClass('active').addClass('inactive');
+function toDef(i) {
+    $('#bt' + i.toString() + '2').addClass('active');
+    $('#bt' + i.toString() + '1').removeClass('active').addClass('inactive');
     state[i] = 1;
 }
 
-function toLeft(i){
-    if (i==0) return
+function toLeft(i) {
+    if (i == 0) return
     var j = i - 1;
     var t = buildCards[i];
     buildCards[i] = buildCards[j];
     buildCards[j] = t;
-    $("#img"+i.toString()).attr("src",buildCards[i].image);
-    $("#img"+j.toString()).attr("src",buildCards[j].image);
+    $("#img" + i.toString()).attr("src", buildCards[i].image);
+    $("#img" + j.toString()).attr("src", buildCards[j].image);
     var k = state[j];
-    if (state[i]==0)
+    if (state[i] == 0)
         toAtk(j);
     else
         toDef(j);
@@ -407,16 +413,16 @@ function toLeft(i){
         toDef(i);
 }
 
-function toRight(i){
-    if (i==4) return
+function toRight(i) {
+    if (i == 4) return
     var j = i + 1;
     var t = buildCards[i];
     buildCards[i] = buildCards[j];
     buildCards[j] = t;
-    $("#img"+i.toString()).attr("src",buildCards[i].image);
-    $("#img"+j.toString()).attr("src",buildCards[j].image);
+    $("#img" + i.toString()).attr("src", buildCards[i].image);
+    $("#img" + j.toString()).attr("src", buildCards[j].image);
     var k = state[j];
-    if (state[i]==0)
+    if (state[i] == 0)
         toAtk(j);
     else
         toDef(j);
@@ -426,46 +432,45 @@ function toRight(i){
         toDef(i);
 }
 
-async function calculator(){
-    if (isCal)
-    {
+async function calculator() {
+    if (isCal) {
         closeAll();
-        return 
+        return
     }
-    for (var i=0; i<5;i++){
-        if (botCards[i].attributes[0].value >= botCards[i].attributes[1].value){
-            if (state[i] == 0){
+    for (var i = 0; i < 5; i++) {
+        if (botCards[i].attributes[0].value >= botCards[i].attributes[1].value) {
+            if (state[i] == 0) {
                 if (botCards[i].attributes[0].value > buildCards[i].attributes[0].value)
                     result[i] = -1;
                 if (botCards[i].attributes[0].value < buildCards[i].attributes[0].value)
-                    result[i] = 1;  
+                    result[i] = 1;
                 if (botCards[i].attributes[0].value == buildCards[i].attributes[0].value)
                     result[i] = 0;
             }
-            else{
+            else {
                 if (botCards[i].attributes[0].value > buildCards[i].attributes[1].value)
                     result[i] = -1;
                 if (botCards[i].attributes[0].value < buildCards[i].attributes[1].value)
-                    result[i] = 1;  
+                    result[i] = 1;
                 if (botCards[i].attributes[0].value == buildCards[i].attributes[1].value)
                     result[i] = 0;
             }
         }
-        else{
+        else {
             stateBot[i] = 1;
-            if (state[i] == 0){
+            if (state[i] == 0) {
                 if (botCards[i].attributes[1].value > buildCards[i].attributes[0].value)
                     result[i] = -1;
                 if (botCards[i].attributes[1].value < buildCards[i].attributes[0].value)
-                    result[i] = 1;  
+                    result[i] = 1;
                 if (botCards[i].attributes[1].value == buildCards[i].attributes[0].value)
                     result[i] = 0;
             }
-            else{
+            else {
                 if (botCards[i].attributes[1].value < buildCards[i].attributes[1].value)
                     result[i] = -1;
                 if (botCards[i].attributes[1].value > buildCards[i].attributes[1].value)
-                    result[i] = 1;  
+                    result[i] = 1;
                 if (botCards[i].attributes[1].value == buildCards[i].attributes[1].value)
                     result[i] = 0;
             }
@@ -474,7 +479,7 @@ async function calculator(){
     var t = 0;
     $('#rPlay2').empty();
     $('#rPlay1').empty();
-    for (var i = 0; i < 5; i++){
+    for (var i = 0; i < 5; i++) {
         t = t + result[i];
         var st1 = 'Thủ';
         if (stateBot[i] == 0)
@@ -483,8 +488,8 @@ async function calculator(){
         if (result[i] == 0)
             st2 = 'Hoà'
         else
-        if (result[i] < 0)
-            st2 = 'Thua'
+            if (result[i] < 0)
+                st2 = 'Thua'
         $('#rPlay2').append(`
         <div class="col"> 
             <div class="card" style="width: 200px; margin: auto">
@@ -504,10 +509,9 @@ async function calculator(){
         alert("Hoà");
     if (t < 0)
         alert("Thua");
-    if (t > 0)
-    {
+    if (t > 0) {
         var card = await takePromotionalCard();
-        var cardJson = await fetch(`/api/v1/cards/${card}`,{
+        var cardJson = await fetch(`/api/v1/cards/${card}`, {
             method: 'get',
             headers: {
                 "Content-Type": "application/json",
@@ -526,37 +530,36 @@ async function calculator(){
     isCal = true;
 }
 
-async function receive(){
+async function receive() {
     var card = await takePromotionalCard();
-        var cardJson = await fetch(`/api/v1/cards/${card}`,{
-            method: 'get',
-            headers: {
-                "Content-Type": "application/json",
-            }
-        });
-    card = await cardJson.json();
-    alert(`Bạn nhận được thẻ bài ${card.name}`);
-    await fetch(`/api/v1/setTimeReceive?privateKey=${Moralis.User.current().get('ethAddress')}&timeReceive=${current}`,
-    {
+    var cardJson = await fetch(`/api/v1/cards/${card}`, {
         method: 'get',
         headers: {
             "Content-Type": "application/json",
         }
     });
+    card = await cardJson.json();
+    alert(`Bạn nhận được thẻ bài ${card.name}`);
+    await fetch(`/api/v1/setTimeReceive?privateKey=${Moralis.User.current().get('ethAddress')}&timeReceive=${current}`,
+        {
+            method: 'get',
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
     closeAll();
 }
 
-function checkIsReceive(){
+function checkIsReceive() {
     current = (new Date()).getTime();
-    if (current - time < 1000*24*60*60){
-        const t = 1000*24*60*60 - current + time;
-        const h = (Math.floor(t/(60*60*1000))).toString() + ' giờ '
-        const m = (Math.floor((t%(60*60*1000))/(60*1000))).toString() + ' phút '
-        const s = (Math.floor((t%(60*1000))/1000)).toString() + ' giây '
-        $('#timeRemaining').html('còn '+h+m+s+' để nhận quà');
+    if (current - time < 1000 * 24 * 60 * 60) {
+        const t = 1000 * 24 * 60 * 60 - current + time;
+        const h = (Math.floor(t / (60 * 60 * 1000))).toString() + ' giờ '
+        const m = (Math.floor((t % (60 * 60 * 1000)) / (60 * 1000))).toString() + ' phút '
+        const s = (Math.floor((t % (60 * 1000)) / 1000)).toString() + ' giây '
+        $('#timeRemaining').html('còn ' + h + m + s + ' để nhận quà');
     }
-    else
-    {
+    else {
         $('#timeRemaining').html('có để nhận quà');
         $('#btAttend').empty();
         $('#btAttend').append(`
@@ -569,20 +572,20 @@ function checkIsReceive(){
 var time = 0;
 var current = 0;
 
-async function openAttend(){
+async function openAttend() {
     const timeJSON = await fetch(`/api/v1/getTimeReceive?privateKey=${Moralis.User.current().get('ethAddress')}`,
-    {
-        method: 'get',
-        headers: {
-            "Content-Type": "application/json",
-        }
-    });
+        {
+            method: 'get',
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
     time = await timeJSON.json();
     time = parseInt(time.time);
     $('#dAttend').show();
     checkIsReceive()
 }
 
-function closeAll(){
+function closeAll() {
     window.location.href = '/';
 }
