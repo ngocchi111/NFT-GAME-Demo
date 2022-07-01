@@ -3,7 +3,7 @@ const serverUrl = "https://9pahilwouybl.usemoralis.com:2053/server";
 const appId = "2Gv1uDCXoElW5qnEbbUBxaDuVS7IxzZsjSyzm2Px";
 Moralis.start({ serverUrl, appId });
 
-const CONTRACT_ADDRESS = "0xf9a2A2A9Ba5CbbaaEFBEFAb22d097fE97Cd0EeB0";
+const CONTRACT_ADDRESS = "0x3be2901AA5c59944aAAbAE4a00F217217Fb465BB";
 
 let user = null;
 let web3 = null;
@@ -536,6 +536,13 @@ async function receive(){
         });
     card = await cardJson.json();
     alert(`Bạn nhận được thẻ bài ${card.name}`);
+    await fetch(`/api/v1/setTimeReceive?privateKey=${Moralis.User.current().get('ethAddress')}&timeReceive=${current}`,
+    {
+        method: 'get',
+        headers: {
+            "Content-Type": "application/json",
+        }
+    });
     closeAll();
 }
 
