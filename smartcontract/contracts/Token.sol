@@ -17,7 +17,11 @@ contract Token is ERC721 {
 
     constructor() ERC721("The bai", "The") {}
 
-    function setAdmin() public {
+    function setAdmin() public payable {
+        // require(
+        //     msg.value == 50 ether,
+        //     "you must deposit 50 eth to become admin"
+        // );
         _admin = msg.sender;
     }
 
@@ -141,14 +145,7 @@ contract Token is ERC721 {
 
         require(msg.sender != owner, "you cannot buy your own token ");
 
-        //do transfer
-        _transfer(owner, msg.sender, _tokenId);
-
-        cardToOwner[_tokenId] = msg.sender;
-        ownerCardCount[msg.sender] = ownerCardCount[msg.sender] + 1;
-        if (ownerCardCount[owner] > 0) {
-            ownerCardCount[owner] = ownerCardCount[owner] - 1;
-        }
+        doTransfer(owner, msg.sender, _tokenId);
     }
 
     function takePromotionalCard() external payable returns (uint256) {
@@ -171,19 +168,51 @@ contract Token is ERC721 {
 
         require(msg.sender != owner, "you cannot receive your own token ");
 
-        //do transfer
-        _transfer(owner, msg.sender, _tokenId);
-
-        cardToOwner[_tokenId] = msg.sender;
-        ownerCardCount[msg.sender] = ownerCardCount[msg.sender] + 1;
-        if (ownerCardCount[owner] > 0) {
-            ownerCardCount[owner] = ownerCardCount[owner] - 1;
-        }
+        doTransfer(owner, msg.sender, _tokenId);
 
         return _tokenId;
     }
 
     function getContractEthBalance() public view returns (uint256) {
         return address(this).balance;
+    }
+
+    function sellCard(uint256 _tokenId) external payable {
+        address owner = cardToOwner[_tokenId];
+        require(
+            owner == msg.sender,
+            "only card owner have permission to sell card"
+        );
+
+        require(msg.sender != _admin, "admin do not sell card");
+
+        uint256 sellPrice = cardToPrice[_tokenId] / 2;
+        doTransfer(owner, _admin, _tokenId);
+
+        payable(owner).transfer(sellPrice);
+    }
+
+    function doTransfer(
+        address owner,
+        address to,
+        uint256 _tokenId
+    ) private {
+        _transfer(owner, to, _tokenId);
+
+        cardToOwner[_tokenId] = to;
+        ownerCardCount[to] = ownerCardCount[to] + 1;
+        if (ownerCardCount[owner] > 0) {
+            ownerCardCount[owner] = ownerCardCount[owner] - 1;
+        }
+    }
+
+    function getPrices() public view returns (uint256[] memory) {
+        uint256[] memory prices = new uint256[](nextId - 1);
+
+        for (uint256 i = 1; i < nextId; i++) {
+            prices[i - 1] = cardToPrice[i];
+        }
+
+        return prices;
     }
 }

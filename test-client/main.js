@@ -3,7 +3,7 @@ const serverUrl = "https://9pahilwouybl.usemoralis.com:2053/server";
 const appId = "2Gv1uDCXoElW5qnEbbUBxaDuVS7IxzZsjSyzm2Px";
 Moralis.start({ serverUrl, appId });
 
-const CONTRACT_ADDRESS = "0xb9a22dAF5712E89d55f395A1B24391C1f62d41f7";
+const CONTRACT_ADDRESS = "0x43BEd9D3dc1Ae1BE6b4dE7d6C4F8f8d79E20ACE2";
 
 let user = null;
 let web3 = null;
@@ -24,7 +24,7 @@ async function login() {
         }
     }
 
-    connectToContract();
+    await connectToContract();
 }
 
 async function connectToContract() {
@@ -59,6 +59,7 @@ document.getElementById("btnLogin").onclick = login;
 
 //TODO: hardcode
 logOut();
+// connectToContract();
 
 
 //test name
@@ -167,4 +168,41 @@ async function takePromotionalCard() {
     var receiveTokenId = data.events.Approval.returnValues.tokenId;
     console.log(receiveTokenId);
     document.getElementById("txtMessage").innerText = receiveTokenId;
+}
+
+
+//test sellCard
+document.getElementById("btnsellCard").onclick = sellCard;
+async function sellCard() {
+    await contract.methods.sellCard(1)
+        .send({
+            from: ethereum.selectedAddress,
+            'gas': 1000000,
+            'gasPrice': 20000000000,
+        });
+}
+
+
+//test getPrices
+document.getElementById("btngetPrices").onclick = getPrices;
+async function getPrices() {
+    var data = await contract.methods.getPrices()
+        .call({
+            from: ethereum.selectedAddress,
+        });
+
+    console.log(data);
+    document.getElementById("txtMessage").innerText = data;
+}
+
+
+//test getContractEthBalance
+document.getElementById("btngetContractEthBalance").onclick = getContractEthBalance;
+async function getContractEthBalance() {
+    let data = await contract.methods.getContractEthBalance().call({ from: ethereum.selectedAddress });
+    console.log(data);
+
+    var price = web3.utils.fromWei(data, 'ether');
+
+    document.getElementById("txtMessage").innerText = price + ' eth';
 }
