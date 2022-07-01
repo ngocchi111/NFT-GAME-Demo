@@ -3,7 +3,7 @@ const serverUrl = "https://9pahilwouybl.usemoralis.com:2053/server";
 const appId = "2Gv1uDCXoElW5qnEbbUBxaDuVS7IxzZsjSyzm2Px";
 Moralis.start({ serverUrl, appId });
 
-const CONTRACT_ADDRESS = "0x6377bE845d63D1A9Ea3Fdb7167Ad560746c1ea79";
+const CONTRACT_ADDRESS = "0xf9a2A2A9Ba5CbbaaEFBEFAb22d097fE97Cd0EeB0";
 
 let user = null;
 let web3 = null;
@@ -85,6 +85,7 @@ async function getAllCardIds() {
         return data;
     }
     catch(e){
+        console.log(e);
         return null;
     }
 }
@@ -121,14 +122,15 @@ async function getTokenPrice() {
 
 
 //test buyCard
-async function buyCard() {
+async function buyCard(card) {
     // const tx = contract.methods.buyCard();
     // const gas = await tx.estimateGas();
     // const gasPrice = await web3.eth.getGasPrice();
     // const data = tx.encodeABI();
     // const nonce = await web3.eth.getTransactionCount(ethereum.selectedAddress);
 
-    const amount = web3.utils.toWei('0.295', 'ether');
+    console.log(card)
+    const amount = web3.utils.toWei(card.price.toString(), 'ether');
 
     // console.log(gas)
     // console.log(gasPrice)
@@ -136,7 +138,7 @@ async function buyCard() {
     const txData = {
         'from': ethereum.selectedAddress,
         'to': CONTRACT_ADDRESS,
-        'data': contract.methods.buyCard(1).encodeABI(),
+        'data': contract.methods.buyCard(card.id).encodeABI(),
         'gas': 1000000,
         'gasPrice': 20000000000,
         'value': amount,
@@ -154,6 +156,27 @@ async function buyCard() {
     });
 }
 
+//sellCard 
+async function sellCard({id}) {
+    await contract.methods.sellCard(id)
+        .send({
+            from: ethereum.selectedAddress,
+            'gas': 1000000,
+            'gasPrice': 20000000000,
+        });
+}
+
+// receive Card
+async function takePromotionalCard() {
+    let data = await contract.methods.takePromotionalCard()
+        .send({
+            from: ethereum.selectedAddress,
+            'gas': 1000000,
+            'gasPrice': 20000000000,
+        });
+    var receiveTokenId = data.events.Approval.returnValues.tokenId;
+    return receiveTokenId;
+}
 
 var isOpen = false;
 checkLogin()
@@ -164,7 +187,10 @@ async function openShop(){
     $('#rShop').empty();
     var i = 0;
     while (cards[i]) {
-        card = cards[i];
+        var cardJson = await fetch(`api/v1/cards/${cards[i]}`, {method: 'get',headers: {
+            "Content-Type": "application/json",
+        }})
+        const card = await cardJson.json();
         i++;
         $('#rShop').append(`
         <div class="col">
@@ -172,7 +198,7 @@ async function openShop(){
                 <img class="card-img-top" src="${card.image}" alt="${card.name}">
                 <div class="card-body">
                     <h5 class="card-title">${card.price} ETH</h5>
-                    <a href="#" class="btn btn-primary">Mua</a>
+                    <button onclick="buyCard({id: ${card.id}, price: ${card.price}})" class="btn btn-primary">Mua</button>
                 </div>
             </div>
         </div>`)
@@ -189,7 +215,10 @@ async function openCollection(){
     $('#rCollection').empty();
     var i = 0;
     while (cards && cards[i]) {
-        card = cards[i];
+        var cardJson = await fetch(`api/v1/cards/${cards[i]}`, {method: 'get',headers: {
+            "Content-Type": "application/json",
+        }})
+        const card = await cardJson.json();
         i++;
         $('#rCollection').append(`
         <div class="col">
@@ -197,7 +226,7 @@ async function openCollection(){
                 <img class="card-img-top" src="${card.image}" alt="${card.name}">
                 <div class="card-body">
                     <h5 class="card-title">${card.price} ETH</h5>
-                    <a href="#" class="btn btn-primary">Bán</a>
+                    <button onclick="sellCard({id: ${card.id}})" class="btn btn-primary">Bán</button>
                 </div>
             </div>
         </div>`)
@@ -212,26 +241,53 @@ const state = [0,0,0,0,0];
 var isCal =  false;
 const result = [0,0,0,0,0];
 const stateBot = [0,0,0,0,0];
+var lv = 1;
 
 async function openPlay(){
     if (!Moralis.User.current())
         await login();
     if (isOpen) return;
-    const resJSON =await fetch('/api/v1/cards',{
+    const _myCards = await getOwnCardIds();
+    if (!_myCards)
+        return
+    const myCards = [];
+    for (var card of _myCards){
+        var cardJson = await fetch(`/api/v1/cards/${card}`,{
+            method: 'get',
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+        card = await cardJson.json();
+        myCards.push(card);
+    }
+    var t = await fetch(`/api/v1/getLevel?privateKey=${Moralis.User.current().get('ethAddress')}`, {
         method: 'get',
         headers: {
             "Content-Type": "application/json",
         }
     });
-    const myCards = await getOwnCardIds();
-    if (!myCards){
+    var lv1 = await t.json();
+    lv = lv1.lv;
+    if (!myCards || myCards.length<5){
         alert('Vui lòng tích đủ 5 thẻ bài!')
         return
     }
-    const cards = await getAllCardIds();
+    var _cards = await getAllCardIds();
+    const cards = [];
+    for (var card of _cards){
+        var cardJson = await fetch(`/api/v1/cards/${card}`,{
+            method: 'get',
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+        card = await cardJson.json();
+        cards.push(card);
+    }
     var check = [-1,-1,-1,-1,-1];
-    var lv = 20;
-    if (lv>19) lv = 19;
+
+    if (lv>19) lv = 1;
     const min = Math.floor(lv/10) * 1500;
     const max = (Math.floor(lv/10) + 1) * 1500;
     var n = 0;
@@ -252,10 +308,11 @@ async function openPlay(){
     }
     check = [-1,-1,-1,-1,-1];
     const cards1 = [];
-    for (var u=0; u<n;u++)
+    for (var u=0; u<cards.length;u++)
         if ((cards[u].attributes[0].value >= min && cards[u].attributes[0].value <= max)
             &&  (cards[u].attributes[1].value >= min && cards[u].attributes[1].value <= max))
                 cards1.push(cards[u])
+    console.log(cards1)
     for (var i = 0; i<5;i++){
         var v = true;
         var u;
@@ -369,7 +426,7 @@ function toRight(i){
         toDef(i);
 }
 
-function calculator(){
+async function calculator(){
     if (isCal)
     {
         closeAll();
@@ -448,8 +505,75 @@ function calculator(){
     if (t < 0)
         alert("Thua");
     if (t > 0)
-        alert("Thắng");
+    {
+        var card = await takePromotionalCard();
+        var cardJson = await fetch(`/api/v1/cards/${card}`,{
+            method: 'get',
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+        lv++;
+        await fetch(`/api/v1/setLevel?privateKey=${Moralis.User.current().get('ethAddress')}&level=${lv}`, {
+            method: 'get',
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+        card = await cardJson.json();
+        alert(`Thắng\n Bạn nhận được thẻ bài ${card.name}`);
+    }
     isCal = true;
+}
+
+async function receive(){
+    var card = await takePromotionalCard();
+        var cardJson = await fetch(`/api/v1/cards/${card}`,{
+            method: 'get',
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+    card = await cardJson.json();
+    alert(`Bạn nhận được thẻ bài ${card.name}`);
+    closeAll();
+}
+
+function checkIsReceive(){
+    current = (new Date()).getTime();
+    if (current - time < 1000*24*60*60){
+        const t = 1000*24*60*60 - current + time;
+        const h = (Math.floor(t/(60*60*1000))).toString() + ' giờ '
+        const m = (Math.floor((t%(60*60*1000))/(60*1000))).toString() + ' phút '
+        const s = (Math.floor((t%(60*1000))/1000)).toString() + ' giây '
+        $('#timeRemaining').html('còn '+h+m+s+' để nhận quà');
+    }
+    else
+    {
+        $('#timeRemaining').html('có để nhận quà');
+        $('#btAttend').empty();
+        $('#btAttend').append(`
+            <button type="button" class="btn btn-primary" style="width: auto; margin-top:100px" onclick="receive()">Nhận quà</button>
+        `)
+    }
+    setTimeout(checkIsReceive, 1000);
+}
+
+var time = 0;
+var current = 0;
+
+async function openAttend(){
+    const timeJSON = await fetch(`/api/v1/getTimeReceive?privateKey=${Moralis.User.current().get('ethAddress')}`,
+    {
+        method: 'get',
+        headers: {
+            "Content-Type": "application/json",
+        }
+    });
+    time = await timeJSON.json();
+    time = parseInt(time.time);
+    $('#dAttend').show();
+    checkIsReceive()
 }
 
 function closeAll(){

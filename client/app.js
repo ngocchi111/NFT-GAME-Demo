@@ -1,12 +1,12 @@
 const express = require('express')
 const path = require('path');
 const app = express()
+const fs = require('fs');
 
 const {engine} = require('express-handlebars');
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', './views');
-
 app.use(express.static('public'))
 
 const url = './assets/data.json'
@@ -76,7 +76,81 @@ app.get('/api/v1/cards/:cardId', (req, res) => {
     console.log('/api/v1/cards/:cardId')
 
     var cardId = req.params.cardId;
-    return res.send(cards[cardId]);
+    return res.send(cards[cardId-1]);
+});
+
+app.get('/api/v1/getLevel',async (req, res) => {
+    var lv = 1;
+    try{
+        if (req.query.privateKey){
+            var ex = await fs.existsSync(`./public/data/level/${req.query.privateKey}.json`)
+            if (ex){
+                var jsonData =await fs.readFileSync(`./public/data/level/${req.query.privateKey}.json`);
+                //console.log(jsonData);
+                lv = JSON.parse(jsonData);
+            }
+        }
+    } catch(e){
+        console.log(e);
+    }
+    res.send({lv: lv});
+});
+
+app.get('/api/v1/setLevel', (req, res) => {
+    var jsonData = req.query.level || 1;
+    try{
+        var json = JSON.stringify(jsonData);
+        fs.writeFile(`./public/data/level/${req.query.privateKey}.json`, json, 'utf8',(err) => {
+
+            if (err) {
+                console.log(`Error writing file: ${err}`);
+            } else {
+                console.log(`File is written successfully!`);
+            }
+        
+        });
+    }
+    catch(e){
+        console.log(e);
+    }
+    res.send(jsonData)
+});
+
+app.get('/api/v1/getTimeReceive', async (req, res) => {
+    var time = 0;
+    try{
+        if (req.query.privateKey){
+            var ex = await fs.existsSync(`./public/data/timeReceive/${req.query.privateKey}.json`)
+            if (ex){
+                var jsonData =await fs.readFileSync(`./public/data/timeReceive/${req.query.privateKey}.json`);
+                //console.log(jsonData);
+                time = JSON.parse(jsonData);
+            }
+        }
+    } catch(e){
+        console.log(e);
+    }
+    res.send({time: time});
+});
+
+app.get('/api/v1/setTimeReceive', (req, res) => {
+    var jsonData = req.query.timeReceive || 0;
+    try{
+        var json = JSON.stringify(jsonData);
+        fs.writeFile(`./public/data/timeReceive/${req.query.privateKey}.json`, json, 'utf8',(err) => {
+
+            if (err) {
+                console.log(`Error writing file: ${err}`);
+            } else {
+                console.log(`File is written successfully!`);
+            }
+        
+        });
+    }
+    catch(e){
+        console.log(e);
+    }
+    res.send({time:jsonData})
 });
 
 const PORT = 3000;

@@ -14,9 +14,9 @@
     </br>
     <button style="background: none; border: 0px; color:  rgb(0, 255, 221); font-size:30px" onclick="openShop()"> <i class="fa fa-shopping-cart"></i> Cửa hàng</button>
     </br>
-    <button style="background: none; border: 0px; color:  rgb(0, 255, 221); font-size:30px"><i class="fa fa-file"> </i> Điểm danh</button>
+    <button style="background: none; border: 0px; color:  rgb(0, 255, 221); font-size:30px"  onclick="openAttend()"><i class="fa fa-file"> </i> Điểm danh</button>
     </br>
-    <button style="background: none; border: 0px; color:  rgb(0, 255, 221); font-size:30px"><i class="fa fa-bookmark"> </i> Hướng dẫn</button>
+    <button style="background: none; border: 0px; color:  rgb(0, 255, 221); font-size:30px" onclick="openHelp()"><i class="fa fa-bookmark"> </i> Hướng dẫn</button>
 </div>
 
 <dialog id="dPlay" style="position: absolute; top: 0px; width: 80%">
@@ -51,5 +51,63 @@
         </div>
     </div>
 </dialog>
-<dialog id="dAttend" style="position: absolute; top: 50px"></dialog>
+<dialog id="dAttend" style="position: absolute; top: 100px; width: 70%">
+    <div class="container">
+        <div class="row">
+            <div style="text-align: center">
+                <h5 id="timeRemaining"></h5>
+            </div>
+        </div>
+        <div class="row">
+            <div style="text-align: center;" id="btAttend">
+                <button type="button" class="btn btn-primary" style="width: auto; margin-top:100px" onclick="closeAll()">OK</button>
+            </div>
+        </div>
+    </div>
+</dialog>
+<dialog id="dHelp" style="position: absolute; top: 50px; width: 60%">
+    <div class="container">
+        <div class="row">
+            <h5>Mua thẻ bài: Cửa hàng <i class="fa fa-arrow-right"></i> lựa chọn thẻ bài <i class="fa fa-arrow-right"></i> mua <i class="fa fa-arrow-right"></i> thanh toán</h5>
+        </div>
+        <div class="row">
+            <h5>Chơi</h5>
+            <lu>Cách chơi:</lu>
+            <li>Lựu chọn trạng thái công hoặc thủ</li>
+            <li>Sắp xếp thứ tự</li>
+            <lu>Quy tắc</lu>
+            <li>So sánh theo thứ tự đã sắp xếp</li>
+            <li>Trường hợp 1: công - công
+                <ol>
+                    <li>điểm atk cao hơn <i class="fa fa-arrow-right"></i> thắng</li>
+                    <li>điểm atk bằng <i class="fa fa-arrow-right"></i> hoà</li>
+                </ol>
+            <li>Trường hợp 2: công - thủ
+                <ol>
+                    <li>điểm atk(công) cao hơn def(thủ) <i class="fa fa-arrow-right"></i> công thắng</li>
+                    <li>điểm def(thủ) cao hơn atk(công) <i class="fa fa-arrow-right"></i> thủ thắng</li>
+                    <li>điểm atk(công) và def(thủ) bằng nhau <i class="fa fa-arrow-right"></i> hoà</li>
+                </ol>
+            <li>Trường hợp 3: thủ - thủ  
+                <ol>
+                    <li>điểm atk thấp hơn <i class="fa fa-arrow-right"></i> thắng</li>
+                    <li>điểm def bằng <i class="fa fa-arrow-right"></i> hoà</li>
+                </ol>
+        </div>
+        <div class="row">
+            <div style="text-align: center;">
+                <button type="button" class="btn btn-primary" style="width: auto; margin-top:100px" onclick="closeHelp()">OK</button>
+            </div>
+        </div>
+    </div>
+</dialog>
 
+<script>
+    function openHelp(){
+        var t = document.getElementById('dHelp');
+        t.show();
+    }
+    function closeHelp(){
+        document.getElementById('dHelp').close();
+    }
+</script>
