@@ -28,8 +28,10 @@ async function login() {
 
 async function checkLogin() {
     user = Moralis.User.current();
-    if (user)
+    if (user) {
+        connectToContract();
         $('#login').empty();
+    }
 }
 checkLogin();
 
